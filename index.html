@@ -769,7 +769,39 @@ mso-bidi-font-family:'Times New Roman';" >&lt;!-- TELEGRAM FORM SCRIPT --&gt;</s
 mso-bidi-font-family:'Times New Roman';" ><o:p></o:p></span></p><p class=MsoNormal ><span style="mso-spacerun:'yes';font-family:Calibri;mso-fareast-font-family:SimSun;
 mso-bidi-font-family:'Times New Roman';" >&lt;script&gt;</span><span style="mso-spacerun:'yes';font-family:Calibri;mso-fareast-font-family:SimSun;
 mso-bidi-font-family:'Times New Roman';" ><o:p></o:p></span></p><p class=MsoNormal ><span style="mso-spacerun:'yes';font-family:Calibri;mso-fareast-font-family:SimSun;
-mso-bidi-font-family:'Times New Roman';" >document.getElementById("tg-form").addEventListener("submit", function(e) {</span><span style="mso-spacerun:'yes';font-family:Calibri;mso-fareast-font-family:SimSun;
+mso-bidi-font-family:'Times New Roman';" ><script>
+function sendToTelegram(e) {
+  e.preventDefault();
+
+  const name = document.getElementById("name").value;
+  const phone = document.getElementById("phone").value;
+  const city = document.getElementById("city").value;
+  const message = document.getElementById("message").value;
+
+  const text =
+`📩 Новая заявка UniWayTR
+👤 Имя: ${name}
+📞 Телефон: ${phone}
+🌍 Город: ${city}
+💬 Сообщение: ${message}`;
+
+  fetch("https://api.telegram.org/bot8316624461:AAFfp-8UzPr_I5fUVQUiJnD7PhEP3Iiu7II/sendMessage", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({
+      chat_id: 5464378247,
+      text: text
+    })
+  })
+  .then(() => {
+    alert("Заявка отправлена!");
+    document.getElementById("tg-form").reset();
+  })
+  .catch(() => {
+    alert("Ошибка отправки");
+  });
+}
+</script>
 mso-bidi-font-family:'Times New Roman';" ><o:p></o:p></span></p><p class=MsoNormal ><span style="mso-spacerun:'yes';font-family:Calibri;mso-fareast-font-family:SimSun;
 mso-bidi-font-family:'Times New Roman';" >&nbsp;&nbsp;&nbsp;&nbsp;e.preventDefault();</span><span style="mso-spacerun:'yes';font-family:Calibri;mso-fareast-font-family:SimSun;
 mso-bidi-font-family:'Times New Roman';" ><o:p></o:p></span></p><p class=MsoNormal ><span style="mso-spacerun:'yes';font-family:Calibri;mso-fareast-font-family:SimSun;
@@ -819,4 +851,5 @@ mso-bidi-font-family:'Times New Roman';" ><o:p>&nbsp;</o:p></span></p><p class=M
 mso-bidi-font-family:'Times New Roman';" >&lt;/body&gt;</span><span style="mso-spacerun:'yes';font-family:Calibri;mso-fareast-font-family:SimSun;
 mso-bidi-font-family:'Times New Roman';" ><o:p></o:p></span></p><p class=MsoNormal ><span style="mso-spacerun:'yes';font-family:Calibri;mso-fareast-font-family:SimSun;
 mso-bidi-font-family:'Times New Roman';" >&lt;/html&gt;</span><span style="mso-spacerun:'yes';font-family:Calibri;mso-fareast-font-family:SimSun;
+
 mso-bidi-font-family:'Times New Roman';" ><o:p></o:p></span></p></div><!--EndFragment--></body></html>
